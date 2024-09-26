@@ -116,11 +116,91 @@ Normalize our dataset.
 
 <H3>Program:</H3> 
 
-Insert your code here
+```python
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.neural_network import MLPClassifier
+from sklearn.metrics import classification_report
+from sklearn.metrics import confusion_matrix
+url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'
+arr = ['SepalLength', 'SepalWidth', 'PetalLength', 'PetalWidth', 'Species']
+df = pd.read_csv(url, names=arr)
+print(df.head())
+a = df.iloc[:, 0:4]
+b = df.select_dtypes(include=[object])
+b = df.iloc[:,4:5]
+training_a, testing_a, training_b, testing_b = train_test_split(a, b, test_size = 0.25)
+myscaler = StandardScaler()
+myscaler.fit(training_a)
+training_a = myscaler.transform(training_a)
+testing_a = myscaler.transform(testing_a)
+m1 = MLPClassifier(hidden_layer_sizes=(12, 13, 14), activation='relu', solver='adam', max_iter=2500)
+m1.fit(training_a, training_b.values.ravel())
+predicted_values = m1.predict(testing_a)
+print(confusion_matrix(testing_b,predicted_values))
+
+print(classification_report(testing_b,predicted_values))
+```
 
 <H3>Output:</H3>
 
-Show your results here
+![image](https://github.com/user-attachments/assets/8936794f-7a88-4760-b5ad-5dda4482f478)
+![image](https://github.com/user-attachments/assets/c0e88be8-5882-4265-8e13-4e93b67c3147)
+![image](https://github.com/user-attachments/assets/0aefe69a-8732-4f75-89c0-f0851dd868d2)
+
+<H3>Program:</H3> 
+
+```py
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.neural_network import MLPClassifier
+from sklearn.metrics import classification_report
+from sklearn.metrics import confusion_matrix
+```
+
+```py
+url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'
+arr = ['SepalLength', 'SepalWidth', 'PetalLength', 'PetalWidth', 'Species']
+df = pd.read_csv(url, names=arr)
+print(df.head())
+```
+
+```py
+a = df.iloc[:, 0:4]
+b = df.select_dtypes(include=[object])
+b = df.iloc[:,4:5]
+```
+
+```py
+training_a, testing_a, training_b, testing_b = train_test_split(a, b, test_size = 0.25)
+myscaler = StandardScaler()
+myscaler.fit(training_a)
+training_a = myscaler.transform(training_a)
+testing_a = myscaler.transform(testing_a)
+m1 = MLPClassifier(hidden_layer_sizes=(12, 13, 14), activation='relu', solver='adam', max_iter=2500)
+m1.fit(training_a, training_b.values.ravel())
+predicted_values = m1.predict(testing_a)
+```
+
+```py
+print(confusion_matrix(testing_b,predicted_values))
+```
+```py
+print(classification_report(testing_b,predicted_values))
+```
+
+<H3>Output:</H3>
+
+![image](https://github.com/PriyankaAnnadurai/Ex-4-NN/assets/118351569/8858d11b-53f2-40fb-aab5-98a97596691d)
+
+
+![image](https://github.com/PriyankaAnnadurai/Ex-4-NN/assets/118351569/35946273-6eda-4dbc-9935-541953788c57)
+
+
+![image](https://github.com/PriyankaAnnadurai/Ex-4-NN/assets/118351569/51ce4d18-d2e6-4fa4-9d29-ec9dcc9eec6f)
+
 
 <H3>Result:</H3>
 Thus, MLP is implemented for multi-classification using python.
